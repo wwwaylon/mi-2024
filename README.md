@@ -1,4 +1,4 @@
-# An introduction to missing data analysis [Webinar Workshop]. Statistical Literacy for Biologists Training Session. Research Scientific Computing, Seattle Childrens Research Institute, Seattle, WA. (2024, November)
+# Workshop "An introduction to missing data analysis"
 
 [Waylon Howard](https://wwwaylon.github.io/)
 
