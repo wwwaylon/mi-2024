@@ -1,2 +1,48 @@
-# mi-2024
-Howard W. J. (2024, November) An introduction to missing data analysis [Webinar Workshop]. Statistical Literacy for Biologists Training Session. Research Scientific Computing, Seattle Childrens Research Institute, Seattle, WA.
+# An introduction to missing data analysis [Webinar Workshop]. Statistical Literacy for Biologists Training Session. Research Scientific Computing, Seattle Childrens Research Institute, Seattle, WA. (2024, November)
+
+[Waylon Howard](https://wwwaylon.github.io/)
+
+## Overview
+
+This session is designed to summarize missing data theory and analysis from an applied research perspective. The first part of the talk is intended to summarize key terms and theory. Then we will discuss techniques for handling missing data. For those interested I have provided examples that demonstrate many fundamental points with an emphasis on general concepts over calculations. All examples are available for download.
+
+## Learning objectives
+
+Upon course completion, we should
+
+1. recognize how theory and modern missing data handling procedures have made it possible for applied researchers to effectively handle missing data.
+2. consider using MI/FIML methods rather than traditional approaches (which are often statistical software program defaults). 
+3. discussion of myths and misconceptions when using MI/FIML. 
+
+## Audience & Prerequisites
+
+This session is intended for a general research audience, especially those interested in missing data from a basic applied research perspective. The talk assumes some basic understanding of statistics and missing data but is largely self-contained. The talk will reference examples using basic statistical analyses (e.g., regression), for which a familiarity would be useful. However, these analyses are not the focus of this talk. 
+
+## Topics
+
+| Day | Topic | Duration | Slides | Exercises | Solutions |
+| ---: | :---- | ------: | :----: | :-------: | :-------: |
+| 1 | Introduction | ~ 2 hrs | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/slides/1_introduction.html), [PDF](https://raw.githubusercontent.com/crsh/reproducible-research-practices-workshop/main/slides/1_introduction.pdf) | - | - |
+| 1 | R Markdown | ~ 2 hrs | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/slides/2_Intro_RMarkdown.html), [PDF](https://raw.githubusercontent.com/crsh/reproducible-research-practices-workshop/main/slides/2_Intro_RMarkdown.pdf) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/2_rmarkdown_question.html) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/2_rmarkdown_solution.html) |
+| 1 | papaja | ~ 1.5 hrs | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/slides/3_papaja.html), [PDF](https://raw.githubusercontent.com/crsh/reproducible-research-practices-workshop/main/slides/3_papaja.pdf) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/3_papaja_question.html) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/3_papaja_solution.html) |
+| 2 | Git & GitHub | ~ 1 hr | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/slides/4_git_github.html), [PDF](https://raw.githubusercontent.com/crsh/reproducible-research-practices-workshop/main/slides/4_git_github.pdf) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/4_git_github_question.html) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/4_git_github_solution.html) |
+| 2 | Git & RStudio | ~ 1 hr | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/slides/5_Git-RStudio.html), [PDF](https://raw.githubusercontent.com/crsh/reproducible-research-practices-workshop/main/slides/5_Git-RStudio.pdf) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/5_git-rstudio_question.html) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/5_git-rstudio_solution.html) |
+| 2 | Collaborate with Git & GitHub | ~ 1.5 hrs | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/slides/6_github_collaboration.html), [PDF](https://raw.githubusercontent.com/crsh/reproducible-research-practices-workshop/main/slides/6_git_collaboration.pdf) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/6_github_collaboration_question.html) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/6_github_collaboration_solution.html) |
+| 2 | Other topics in reproducible research | ~ 1.5 hrs | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/slides/7_Other_Topics.html), [PDF](https://raw.githubusercontent.com/crsh/reproducible-research-practices-workshop/main/slides/7_Other_Topics.pdf) | - | - |
+
+## Recommended literature
+
+> Enders, C. K. (2010). Applied missing data analysis. New York: Guilford.
+
+> Graham, J. W. (2009). Missing data analysis: Making it work in the real world. Annual Review of Psychology, 60, 549-576.
+
+## Citation
+
+If you use these materials, please cite them as follows.
+
+> Aust, F., & Breuer, J. (2022). Workshop on reproducible research practices for psychologists. https://github.com/crsh/reproducible-research-practices-workshop
+
+## Acknowledgements
+
+The workflow recommendations in this workshop are based on Klein, O., Hardwicke, T. E., Aust, F., Breuer, J., Danielsson, H., Hofelich Mohr, A., … Frank, M. C. (2018). A Practical Guide for Transparency in Psychological Science. Collabra: Psychology, 4(1). doi: [10.1525/collabra.158](https://doi.org/10.1525/collabra.158) ([Supplementary material](
+http://psych-transparency-guide.uni-koeln.de/))
