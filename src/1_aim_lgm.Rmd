@@ -15,10 +15,6 @@ exclude: true
 ```
 
 
-```{r out.extra = "style='float:right;'", out.width = "140px"}
-include_graphics("img/aim1-sf.png")
-```
-
 ---
 layout: true
 name: git
