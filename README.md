@@ -40,9 +40,8 @@ This session is intended for a general research audience, especially those inter
 
 If you use these materials, please cite them as follows.
 
-> Aust, F., & Breuer, J. (2022). Workshop on reproducible research practices for psychologists. https://github.com/crsh/reproducible-research-practices-workshop
+> Howard W. J. (2024, November). An introduction to missing data analysis [Webinar Workshop]. Statistical Literacy for Biologists Training Session. Research Scientific Computing, Seattle Childrens Research Institute, Seattle, WA. 
 
 ## Acknowledgements
 
-The workflow recommendations in this workshop are based on Klein, O., Hardwicke, T. E., Aust, F., Breuer, J., Danielsson, H., Hofelich Mohr, A., … Frank, M. C. (2018). A Practical Guide for Transparency in Psychological Science. Collabra: Psychology, 4(1). doi: [10.1525/collabra.158](https://doi.org/10.1525/collabra.158) ([Supplementary material](
-http://psych-transparency-guide.uni-koeln.de/))
+The recommendations in this workshop are based on Little, T. D. (2024). Longitudinal structural equation modeling. Guilford Publications.
