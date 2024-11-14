@@ -1,0 +1,83 @@
+Here are 10 questions, hints, and solutions about the problems with Full Information Maximum Likelihood (FIML) for handling missing data:
+
+Exercise 1:
+What is the main advantage of Full Information Maximum Likelihood (FIML) over traditional methods like listwise deletion?
+
+Hint: Consider how FIML uses all available data and how it differs from excluding cases with missing data.
+
+Solution 1:
+FIML utilizes all available data by estimating parameters from the likelihood function based on the observed data, without excluding cases with missing values. This allows for more efficient use of data and avoids the bias introduced by listwise deletion, especially when data are missing at random (MAR).
+
+Exercise 2:
+What is one potential limitation of FIML when the missing data mechanism is not missing at random (MNAR)?
+
+Hint: Think about how the assumptions of the missing data mechanism might affect FIML’s performance.
+
+Solution 2:
+FIML assumes that data are missing at random (MAR), meaning that the probability of missing data depends only on observed data. When data are missing not at random (MNAR), FIML may not provide unbiased estimates, as it cannot account for the missingness mechanism properly.
+
+Exercise 3:
+How does FIML handle the relationships between observed and missing data?
+
+Hint: Consider how FIML uses available information to estimate missing data.
+
+Solution 3:
+FIML estimates missing data by maximizing the likelihood of the observed data under a model that includes both observed and missing data. It assumes that missing data are conditionally independent given the observed data and uses the available data points to estimate the missing values in a way that reflects their relationship to the observed data.
+
+Exercise 4:
+What is the role of the likelihood function in FIML?
+
+Hint: Reflect on how likelihood functions are used in statistical estimation.
+
+Solution 4:
+In FIML, the likelihood function is used to estimate parameters by considering both observed and missing data. The method involves computing the likelihood of the observed data given the parameters and then optimizing the function to find the best-fitting model parameters. This allows FIML to utilize all available information, including cases with missing data.
+
+Exercise 5:
+What is one challenge when using FIML with non-normal data?
+
+Hint: Consider the assumptions FIML makes about the data distribution.
+
+Solution 5:
+FIML assumes that the data are normally distributed for optimal performance. If the data deviate significantly from normality, FIML estimates may be biased or inefficient. In such cases, transformations or robust methods may be needed to ensure accurate parameter estimates.
+
+Exercise 6:
+How does FIML compare to multiple imputation when handling missing data?
+
+Hint: Think about the differences in how the two methods handle uncertainty.
+
+Solution 6:
+FIML estimates missing data within a single likelihood framework, providing one set of estimates for the missing data. In contrast, multiple imputation generates several imputed datasets and combines results to account for uncertainty in the missing data. FIML can be more efficient with less computational complexity, but multiple imputation is often preferred when uncertainty in imputation is critical.
+
+Exercise 7:
+What impact does FIML have on model fit when there is a large amount of missing data?
+
+Hint: Consider how missing data influences model fitting in FIML.
+
+Solution 7:
+FIML can handle large amounts of missing data more effectively than traditional methods, as it utilizes all available data for parameter estimation. However, when the proportion of missing data is very high, the accuracy of FIML estimates may decline, and model fit can be affected, especially if the data are not missing at random (MNAR).
+
+Exercise 8:
+What assumptions must be met for FIML to produce unbiased estimates?
+
+Hint: Think about the missing data mechanism and model assumptions.
+
+Solution 8:
+For FIML to produce unbiased estimates, the data must be missing at random (MAR), and the model used for estimation must correctly represent the relationship between the variables. If the missing data mechanism is not MAR (e.g., missing not at random, MNAR), FIML may produce biased estimates.
+
+Exercise 9:
+Why might FIML be considered more appropriate than mean imputation when handling missing data?
+
+Hint: Consider how FIML handles missing data in relation to the overall dataset.
+
+Solution 9:
+FIML is more appropriate than mean imputation because it estimates model parameters based on all available data, rather than replacing missing values with a single value (such as the mean). This allows FIML to better preserve the relationships between variables and avoid distorting the data, as mean imputation does.
+
+Exercise 10:
+What is one limitation of FIML in terms of model complexity?
+
+Hint: Reflect on how complex models might affect the performance of FIML.
+
+Solution 10:
+FIML can become computationally intensive as model complexity increases, especially with large datasets or models with many parameters. Complex models may require more computational resources and longer processing times, making FIML less efficient in such cases compared to simpler imputation methods.
+
+These questions, hints, and solutions highlight the strengths and potential challenges of using Full Information Maximum Likelihood (FIML) for handling missing data, with an emphasis on its assumptions, computational demands, and comparison with other methods.

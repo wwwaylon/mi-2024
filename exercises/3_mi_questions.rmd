@@ -1,0 +1,101 @@
+---
+title     : "Exercises: "
+subtitle  : "Title"
+---
+
+```{r child = "_setup.Rmd"}
+```
+
+```{block, box.title = "Exercise 1", box.body = list(fill = "white"), box.icon = "fa-star"}
+What is multiple imputation, and why is it often preferred over other methods for handling missing data?
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Consider the strengths of multiple imputation in providing unbiased estimates and addressing uncertainty.
+```
+
+```{block, box.title = "Solution 1", box.icon = "fa-check", solution = T}
+Multiple imputation is a statistical method where missing values are replaced by multiple sets of simulated values to allow for accurate estimation. It helps address uncertainty by creating several completed datasets, each analyzed to produce pooled results.
+
+```{block, box.title = "Exercise 2", box.body = list(fill = "white"), box.icon = "fa-star"}
+Explain the basic steps involved in conducting multiple imputation.
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Think about the stages in handling missing data and the generation of multiple datasets.
+
+```{block, box.title = "Solution 2", box.icon = "fa-check", solution = T}
+The basic steps in multiple imputation are: (1) imputation of missing values using a model that incorporates the observed data, (2) creation of multiple complete datasets, (3) analysis of each dataset separately, and (4) pooling of the results.
+
+```{block, box.title = "Exercise 3", box.body = list(fill = "white"), box.icon = "fa-star"}
+How does multiple imputation address uncertainty due to missing data in statistical analyses?
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Think about how multiple datasets reflect different plausible values for the missing data.
+
+```{block, box.title = "Solution 3", box.icon = "fa-check", solution = T}
+Multiple imputation addresses uncertainty by generating multiple plausible values for the missing data, which allows the analysis to account for the variation and uncertainty that arise from missingness.
+
+```{block, box.title = "Exercise 4", box.body = list(fill = "white"), box.icon = "fa-star"}
+What are some assumptions underlying multiple imputation? Describe the role of the "missing at random" (MAR) assumption.
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Reflect on the type of missing data that multiple imputation can handle effectively.
+
+```{block, box.title = "Solution 4", box.icon = "fa-check", solution = T}
+Multiple imputation relies on the assumption that the data are "Missing at Random" (MAR), meaning that the probability of missing data depends on observed values but not on unobserved values. This assumption allows the imputation model to generate plausible estimates of the missing data.
+
+```{block, box.title = "Exercise 5", box.body = list(fill = "white"), box.icon = "fa-star"}
+In the context of multiple imputation, what is the purpose of generating multiple datasets rather than just a single imputed dataset?
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Think about the role of variability and how multiple imputed datasets contribute to more accurate estimation.
+
+{block, box.title = "Solution 5", box.icon = "fa-check", solution = T}
+Generating multiple datasets accounts for the uncertainty in the imputation process. It helps prevent underestimation of variability, providing more reliable estimates and standard errors.
+
+{block, box.title = "Exercise 6", box.body = list(fill = "white"), box.icon = "fa-star"}
+Describe how the process of pooling works in multiple imputation. Why is pooling necessary, and how is it generally performed?
+
+{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Consider how results from multiple analyses are combined to provide a final estimate.
+
+{block, box.title = "Solution 6", box.icon = "fa-check", solution = T}
+Pooling combines the results from the multiple imputed datasets by averaging the estimates and adjusting for between-imputation variability. This ensures that the uncertainty from missing data is properly incorporated into the final analysis.
+
+{block, box.title = "Exercise 7", box.body = list(fill = "white"), box.icon = "fa-star"}
+What are some challenges or limitations associated with multiple imputation? Provide at least two examples.
+
+{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Think about data characteristics and the complexity of modeling.
+
+{block, box.title = "Solution 7", box.icon = "fa-check", solution = T}
+Challenges in multiple imputation include (1) difficulty in modeling complex relationships when imputing data, and (2) the potential for biased imputations if the MAR assumption is violated.
+
+{block, box.title = "Exercise 8", box.body = list(fill = "white"), box.icon = "fa-star"}
+How does multiple imputation differ from other imputation methods, such as single imputation or last observation carried forward (LOCF)?
+
+{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Consider how different methods treat missing data and the associated risks.
+
+{block, box.title = "Solution 8", box.icon = "fa-check", solution = T}
+Unlike single imputation or LOCF, multiple imputation generates several plausible values for missing data, preserving uncertainty and reducing the risk of underestimating variability in results.
+
+{block, box.title = "Exercise 9", box.body = list(fill = "white"), box.icon = "fa-star"}
+In practice, how many imputations should be created? What factors influence this decision, and how might it impact the results?
+
+{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Think about how the number of imputations relates to statistical precision.
+
+{block, box.title = "Solution 9", box.icon = "fa-check", solution = T}
+Typically, at least 5-10 imputations are recommended, though the number depends on the amount of missing data and the desired statistical precision. More imputations generally lead to more stable results.
+
+{block, box.title = "Exercise 10", box.body = list(fill = "white"), box.icon = "fa-star"}
+What diagnostic checks are recommended after performing multiple imputation to ensure the quality and validity of the imputed data?
+
+{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Consider the diagnostic tools that assess the quality of imputed datasets.
+
+{block, box.title = "Solution 10", box.icon = "fa-check", solution = T}
+Recommended diagnostic checks include (1) examining the distribution of imputed values to ensure they are reasonable, (2) checking convergence of the imputation model, and (3) comparing the analysis results across multiple imputations.
+
+This is the structure for the 10 exercises, with each question, clue, and solution contained within code blocks.
