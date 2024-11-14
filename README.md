@@ -1,4 +1,4 @@
-# Workshop "An introduction to missing data analysis"
+# Workshop "Handling Missing Data in Research: A Practical Guide"
 
 [Waylon Howard](https://wwwaylon.github.io/)
 
@@ -18,11 +18,12 @@ Upon course completion, we should
 
 This session is intended for a general research audience, especially those interested in missing data from a basic applied research perspective. The talk assumes some basic understanding of statistics and missing data but is largely self-contained. The talk will reference examples using basic statistical analyses (e.g., regression), for which a familiarity would be useful. However, these analyses are not the focus of this talk. 
 
-## Topics
+## Topics 
 
 | # | Topic | Duration | Slides | Exercises | Solutions |
-| ---: | :---- | ------: | :----: | :-------: | :-------: |
-| 1 | Theory | ~ 2 hrs | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/slides/2_Intro_RMarkdown.html), [PDF](https://raw.githubusercontent.com/crsh/reproducible-research-practices-workshop/main/slides/2_Intro_RMarkdown.pdf) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/2_rmarkdown_question.html) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/2_rmarkdown_solution.html) |
+| -: | :------- | ----: | :------: | :------: | :------: |
+| 1 | Introduction | ~ 0.5 hrs | [html](https://github.com/wwwaylon/mi-2024/raw/ec5724f92c4ade94b1b7585b8bed96ee1d123c2c/slides/1-intro.html), [pdf](https://github.com/wwwaylon/mi-2024/raw/refs/heads/main/slides/1-intro.pdf), [pptx](https://github.com/wwwaylon/mi-2024/raw/refs/heads/main/slides/1-intro.pptx) | - | - |
+| 1 | Understanding Missing Data: Definition and Types | ~ 2 hrs | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/slides/2_Intro_RMarkdown.html), [PDF](https://raw.githubusercontent.com/crsh/reproducible-research-practices-workshop/main/slides/2_Intro_RMarkdown.pdf) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/2_rmarkdown_question.html) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/2_rmarkdown_solution.html) |
 | 2 | Traditional Methods | ~ 1.5 hrs | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/slides/3_papaja.html), [PDF](https://raw.githubusercontent.com/crsh/reproducible-research-practices-workshop/main/slides/3_papaja.pdf) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/3_papaja_question.html) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/3_papaja_solution.html) |
 | 3 | MI & FIML | ~ 1 hr | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/slides/4_git_github.html), [PDF](https://raw.githubusercontent.com/crsh/reproducible-research-practices-workshop/main/slides/4_git_github.pdf) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/4_git_github_question.html) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/4_git_github_solution.html) |
 | 4 | Auxiliary Variables | ~ 1 hr | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/slides/5_Git-RStudio.html), [PDF](https://raw.githubusercontent.com/crsh/reproducible-research-practices-workshop/main/slides/5_Git-RStudio.pdf) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/5_git-rstudio_question.html) | [HTML](https://crsh.github.io/reproducible-research-practices-workshop/exercises/5_git-rstudio_solution.html) |
@@ -37,7 +38,7 @@ This session is intended for a general research audience, especially those inter
 
 If you use these materials, please cite them as follows.
 
-> Howard W. J. (2024, November). An introduction to missing data analysis [Webinar Workshop]. Statistical Literacy for Biologists Training Session. Research Scientific Computing, Seattle Childrens Research Institute, Seattle, WA. 
+> Howard W. J. (2024, November). Handling Missing Data in Research: A Practical Guide [Webinar Workshop]. Statistical Literacy for Biologists Training Session. Research Scientific Computing, Seattle Childrens Research Institute, Seattle, WA. 
 
 ## Acknowledgements
 

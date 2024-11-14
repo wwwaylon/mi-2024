@@ -8,13 +8,68 @@ subtitle  : "Reproducible research workflows for psychologists"
 
 
 ```{block, box.title = "Exercise 1", box.body = list(fill = "white"), box.icon = "fa-star"}
-This is exercise 1.
+Which missing data mechanism occurs when the probability of missingness is unrelated to both observed and unobserved data?
 ```
 
 ```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
-Not really a lot to do here.
+Think about a situation where missing data occurs purely by chance.
 ```
 
-```{block, box.title = "Solution 1", box.icon = "fa-check", solution = T}
-Well done!
+```{block, box.title = "Solution 1", box.icon = "fa-check", solution = F}
+The correct answer is Missing Completely at Random (MCAR).
 ```
+
+
+```{block, box.title = "Exercise 2", box.body = list(fill = "white"), box.icon = "fa-star"}
+Which missing data mechanism occurs when the probability of missingness depends on the observed data but not on the missing data itself?
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Focus on situations where missingness is linked to information already collected but not to the data you are missing.
+```
+
+```{block, box.title = "Solution 2", box.icon = "fa-check", solution = F}
+The correct answer is Missing at Random (MAR).
+```
+
+
+```{block, box.title = "Exercise 3", box.body = list(fill = "white"), box.icon = "fa-star"}
+Which missing data mechanism occurs when the probability of missingness is related to the unobserved data itself?
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Think about situations where the data you are missing is actually influencing whether the data is missing in the first place.
+```
+
+```{block, box.title = "Solution 3", box.icon = "fa-check", solution = F}
+The correct answer is Missing Not at Random (MNAR).
+```
+
+
+```{block, box.title = "Exercise 4", box.body = list(fill = "white"), box.icon = "fa-star"}
+In a survey, if participants skip questions about their income but answer other questions, what is this an example of?
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Think about situations where people are more likely to miss certain types of questions, such as sensitive ones.
+```
+
+```{block, box.title = "Solution 4", box.icon = "fa-check", solution = F}
+The correct answer is Missing Not at Random (MNAR), as missingness is likely tied to the income variable itself.
+```
+
+
+```{block, box.title = "Exercise 5", box.body = list(fill = "white"), box.icon = "fa-star"}
+What statistical technique can be used to handle data that is Missing at Random (MAR)?
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+You may have seen methods that allow you to fill in missing values using information from observed data.
+```
+
+```{block, box.title = "Solution 5", box.icon = "fa-check", solution = F}
+The correct answer is multiple imputation or maximum likelihood estimation.
+```
+
+
+

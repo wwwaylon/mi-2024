@@ -12,7 +12,15 @@ library(xaringanthemer)
 library(emo)
 library(tweetrmd)
 
-my_colors <- c("#bc0031", "#d67f42")
+my_colors <- c("#00B5AD", "#4B4F54")
+
+# Seattle Children's official colors include:
+#Teal ("#00B5AD")
+#Bright Green ("#8DC63F")
+#Light Blue ("#00A9E0")
+#Warm Gray ("#A7A9AC")
+#Dark Gray ("#4B4F54")
+
 ```
 
 ```{r extras-styling, include = FALSE}

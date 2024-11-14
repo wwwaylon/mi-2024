@@ -1,5 +1,5 @@
 ---
-title: "An introduction to missing data analysis"
+title: "Handling Missing Data in Research: A Practical Guide"
 subtitle  : "<small>Introduction</small>"
 author: "`r paste(params$author, collapse = ' & ')`"
 date: "`r paste0(params$location, ', ', params$date)`"
@@ -20,12 +20,12 @@ exclude: true
 
 [Waylon Howard](https://wwwaylon.github.io/)
 
-- Senior researcher at [*GESIS - Leibniz Institute for the Social Sciences*](https://www.gesis.org/home) (Department Survey Data Curation) & (co-) leader of the team *Research Data & Methods* at the [*Center for Advanced Internet Studies*](https://www.cais.nrw/) (CAIS)
+- Principal Quantitative Methodologist and Biostatistician at [*Biostatistics, Epidemiology and Analytics in Research (BEAR) Core*](https://www.seattlechildrens.org/research/resources/bear) (Seattle Children's Research Integration Hub) 
 
 --
-  - Uses and effects of digital media
-  - Computational methods
-  - Data management & Open science
+  - Research methods, statistics, and measurement
+  - Grant writing, manuscript development, and methodological innovation
+  - Training and mentoring
 
 ---
 
@@ -33,7 +33,7 @@ exclude: true
 
 - What's your name?  
 - What is your research area?  
-- What are your experiences with reproducible research (and the tools we cover in this course)?
+- What are your experiences with missing data in research (and the tools used)?
 - What are your expectations for this course?
 
 ---
@@ -43,49 +43,37 @@ exclude: true
 Slides and material are available at
 
 .center[
-http://frederikaust.com/reproducible-research-practices-workshop
+https://github.com/wwwaylon/mi-2024
 ]
 
-- The workshop consists of a combination of lectures and hands-on exercises
+- The session consists of a combination of lectures and hands-on exercises
 - Feel free to ask questions anytime
-- We will have frequent breaks (please remind us if necessary)
+- We will have frequent breaks (presentation in sections)
 
 ---
 
 # Preliminaries
 
-Did you have any trouble with the setup for this workshop?
+Did you have any trouble with the setup for this session?
 
 Installing...
 
-- [`git`](https://git-scm.com/)
+- [`GitHub`](https://github.com/)
 - [`R`](https://www.r-project.org/) & [*RStudio*](https://www.rstudio.com/products/rstudio/)
 - a `TeX` distribution (e.g., [TinyTeX](https://yihui.name/tinytex/))
 - [`papaja`](https://github.com/crsh/papaja)
 
 ---
 
-# Preliminaries
-
-Did you have any trouble with the setup for this workshop?
-
-Creating...
-
-- a [*GitHub*](https://github.com/) account
-- an account for the [KU Leuven *GitLab*](https://gitlab.kuleuven.be/)
-- access credentials for *GitHub* (HTTPS, PAT) and *GitLab* (SSH)
-
----
-
 ## Course schedule
 
-.center[**Wednesday, April 27th, 2022**]
+.center[**Wednesday, November 20th, 2024**]
 
 ```{r schedule Wed, echo = F}
 schedule <- data.frame(
-  "When?" = c("10:00 - 12:00", "12:00 - 13:00", "13:00 - 15:00", "15:00 - 15:30", "15:30 - 17:30")
+  "When?" = c("12:00 - 12:30", "12:30 - 1:00", "1:00 - 1:30", "1:30 - 2:00")
   , "&nbsp;" = "&nbsp;"
-  , "What?" = c("Introduction: Reproducible Workflows", "<i>Lunch break</i>", "Introduction to R Markdown", "<i>Coffee break</i>", "papaja")
+  , "What?" = c("Introduction: Missing Data", "<i>Traditional Methods</i>", "MI & FIML", "<i>Auxiliary Variables</i>")
   , check.names = FALSE
 )
 knitr::kable(
@@ -98,151 +86,194 @@ knitr::kable(
 
 ---
 
-## Course schedule
+# What is missing data?
 
-.center[**Thursday, April 28th, 2022**]
-
-```{r schedule Thur-1, echo = F}
-sharing_options <- data.frame(
-  "When?" = c("09:00 - 10:15", "10:15 - 10:30", "10:30 - 11:30", "11:30 - 12:30")
-  , "&nbsp;" = "&nbsp;"
-  , "What?" = c("Introduction to Git & GitHub", "<i>Coffee break</i>", "Git in RStudio", "Git & GitHub for collaboration - Part 1")
-  , check.names = FALSE
-)
-knitr::kable(
-  sharing_options
-  , format = "html"
-  , align = "ll"
-  , escape = FALSE
-)
+```{r, what, out.width = "85%", echo = F}
+include_graphics("./img/why-missing.png")
 ```
+
+Basically, values for certain variables are unavailable.
 
 ---
 
-## Course schedule
+# Why missing data matters?
 
-.center[**Thursday, April 28th, 2022**]
-```{r schedule Thur-2, echo = F}
-sharing_options <- data.frame(
-  "When?" = c("12:30 - 13:30", "13:30 - 14:00", "14:00 - 14:15", "14:15 - 15:30", "15:30 - 16:00")
-  , "&nbsp;" = "&nbsp;"
-  , "What?" = c("<i>Lunch break</i>", "Git & GitHub for collaboration - Part 2", "<i>Coffee break</i>", "Other tools & workflows", "Wrap-Up")
-  , check.names = FALSE
-)
-knitr::kable(
-  sharing_options
-  , format = "html"
-  , align = "ll"
-  , escape = FALSE
-)
-```
+Missing data can significantly affect research outcomes, policy decisions, business strategies, and real-world interventions.
+
+- **Bias** (systematic errors in statistical estimates)
+- **Power** (decreased statistical power)
+
+.small[See [Enders, C. K. (2022)](https://www.guilford.com/books/Applied-Missing-Data-Analysis/Craig-Enders/9781462549863) for further details]
 
 ---
 
-# What is reproducibility?
+# Defining missing data
 
-.center[
-```{r repro-tweet, echo=FALSE}
-tweetrmd::tweet_embed("https://twitter.com/jakevdp/status/519563939177197571")
+As with many concepts in science, missing data is defined and addressed in different ways. We will explore some basic definitions next.
+
+---
+
+# Defining patterns
+
+*Where* are the data missing?
+
+```{r, three-dims, out.width = "65%", echo = F}
+include_graphics("./img/patterns.png")
 ```
+
+<small><small>Four typical missing data patterns. .highlight[Shaded areas] represent missing data.</small></small>
+
+---
+
+# Defining mechanisms
+
+*Why* are the data missing?
+
+```{r, turing-dims, out.width = "45%", echo = F}
+include_graphics("./img/mechanisms.png")
+```
+<small><small>See [*Rubin's Missing Data Classification System*](https://people.csail.mit.edu//jrennie/trg/papers/rubin-missing-76.pdf) for further details. 
+Illustration adapted from [Little, T. D. (2024)](https://www.guilford.com/books/Longitudinal-Structural-Equation-Modeling/Todd-Little/9781462553143).</small></small>
+
+---
+
+# MAR - MNAR continuum `r ji("surprised")`
+
+> These three kinds of missingness .highlight[should not be thought of as mutually exclusive categories of missingness], despite the fact that they are often misperceived as such... The best way to think of all missing data is as a continuum between MAR and MNAR ([Graham, J. W., 2009](https://web.archive.org/web/20170808222256id_/http://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/emalgm?action=AttachFile&do=get&target=graham.pdf), p. 567).
+
+---
+
+.pull-left-45[
+
+# *PRO* dataset
+
+```{r, prodata, out.width = "60%", out.height= "60%", echo = F, message=FALSE, warning=FALSE}
+
+library(dplyr)
+
+# Data for each row in the table
+ID <- 1:20
+var1 <- c(36.6, 41.8, 42.6, 43.1, 43.4, 44.2, 44.9, 46.3, 48.6, 49.0, 
+            50.0, 51.6, 54.6, 54.8, 55.7, 57.2, 57.6, 60.3, 60.9, 65.3)
+var2 <- c(40.0, 40.0, 35.0, 43.0, 42.6, 39.0, 45.0, 45.2, 50.0, 40.0, 
+            45.0, 44.7, 48.5, 50.2, 42.8, 50.0, 54.0, 52.0, 58.0, 60.0)
+
+# Create the main data frame
+data <- data.frame(ID, var1, var2)
+
+# Calculate summary statistics
+mean_var1 <- round(mean(var1, na.rm=T),2)
+mean_var2 <- round(mean(var2, na.rm=T),2)
+sd_var1 <- round(sd(var1, na.rm=T),2)
+sd_var2 <- round(sd(var2, na.rm=T),2)
+
+cor_test <- cor.test(var1, var2, use = "complete.obs")
+correl <- round(cor_test$estimate, 2)
+if(cor_test$p.value < .001) {
+  p_value <- "< .001"} else {
+  p_value <- paste0("= ", round(cor_test$p.value, 3)) }
+
+data$var1 <- sprintf("%.2f", data$var1)
+data$var2 <- sprintf("%.2f", data$var2)
+
+
+```
+
+Descriptive Statistics
+
+- <small>**var1** <small>(*M* = `r mean_var1`, *SD* = `r sd_var1`)</small></small>
+- <small>**var2** <small>(*M* = `r mean_var2`, *SD* = `r sd_var2`)</small></small>
+- <small>*r* = `r correl`, *p* `r p_value`</small>
+
+<small>Data sources: [xlsx](www.google.com), [sas](www.google.com), [R](www.google.com)</small>
+]
+
+.pull-right-45[
+```{r complete}
+knitr::kable(
+  data
+  , format = "html"
+  , align = "ll"
+  , escape = FALSE
+) %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"), 
+    font_size = 13.5, full_width = TRUE
+  )
+```
+]
+
+
+---
+
+.pull-right-60[
+
+## Complete Data
+
+```{r, plot1, out.width = "100%", out.height= "100%", echo = F, message=FALSE, warning=FALSE, dpi = 300}
+library(ggplot2)
+library(smplot2)
+
+data$var1 <- as.numeric(data$var1)
+data$var2 <- as.numeric(data$var2)
+
+
+ggplot(data = data, mapping = aes(x = var1, y = var2)) +
+  geom_point(size = 7, color = "#00A9E0", alpha = 0.6) + # Increase point size
+  geom_smooth(method = "lm", se = FALSE, color = "#8DC63F", size = 3.5) +
+  theme_classic() +
+  scale_x_continuous(breaks = seq(20, 70, by = 10), limits = c(20, 70)) +  
+  scale_y_continuous(breaks = seq(20, 70, by = 10), limits = c(20, 70)) + 
+  sm_statCorr(color = "#8DC63F", text_size = 8) + 
+   theme(
+    plot.title = element_text(hjust = 0.5, size = 24),  # Increase title font size
+    axis.title = element_text(size = 18),  # Increase axis label font size
+    axis.text = element_text(size = 18),  # Increase tick label font size
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank(),
+    panel.border = element_blank(),
+    axis.line = element_line(color = "#A7A9AC", size = 1.5),
+    axis.ticks = element_line(size = 1.2),
+    axis.ticks.length = unit(0.25, "cm"),
+    text = element_text(family = "Arial", color = "#4B4F54")
+  ) 
+
+
+```
+]
+
+.pull-left-10[
+```{r complete2}
+knitr::kable(
+  data
+  , format = "html"
+  , align = "ll"
+  , escape = FALSE
+) %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"), 
+    font_size = 13.5, full_width = TRUE
+  )
+```
+
 ]
 
 ---
 
-# Why reproducibility matters
+# Traditional Methods
 
+.small[I will highlight some traditional ways of thinking about and approaching the problem of missing data. While these techniques are straightforward, they have important limitations to consider.
 
-.center[
-```{r repro-lazy, echo=FALSE}
-tweetrmd::tweet_embed("https://twitter.com/hadleywickham/status/598532170160873472")
-```
-]
-
----
-
-# Defining reproducibility
-
-As with (almost) everything in science, there are different definitions of reproducibility.
-We will discuss some of them in the following.
-
----
-
-# Defining dimensions
-
-3-dimensional concept space
-
-```{r, three-dims, out.width = "50%", echo = F}
-#include_graphics("./img/trr-cube.jpg")
-```
-<small><small>By Christof Schöch. Source: https://dh-trier.github.io/trr/#/2/1</small></small>
-
----
-
-# Defining dimensions
-
-```{r, turing-dims, out.width = "75%", echo = F}
-#include_graphics("./img/turing_way_parts.jpg")
-```
-<small><small>[*The Turing Way Project*](https://the-turing-way.netlify.app/welcome.html) illustration by Scriberia. DOI: [10.5281/zenodo.3332807](https://doi.org/10.5281/zenodo.3332807)</small></small>
-
----
-
-# *The Turing Way* definition
-
-```{r, turing-def, out.width = "80%", echo = F}
-#include_graphics("./img/reproducible-matrix.jpg")
-```
-<small><small>Source: https://the-turing-way.netlify.app/reproducible-research/overview/overview-definitions.html</small></small>
-
----
-
-# Replication or reproduction?
-
-```{r, other-def, out.width = "50%", echo = F}
-#include_graphics("./img/replication-typology-a.jpg")
-```
-<small><small>By Christof Schöch. Source: https://dh-trier.github.io/trr/#/2/2</small></small>
-
----
-exclude: true
-<!-- Frederik takes over from here -->
-
-# Zooming in
-
-```{r zoomable-plot, out.height = "95%", out.extra='id="zoom-margin"'}
-#knitr::include_graphics("img/reproducibility-schema-1.png")
-```
-
----
-
-# Reproducible research workflows
-
-> being an open scientist means .highlight[adopting a few straightforward research management practices, which lead to less error-prone, reproducible research workflows] ([Klein et al., 2018](https://doi.org/10.1525/collabra.158), p. 11)
-
----
-
-# Research management practices
-
-There are quite a few practices that researchers can adopt to increase the reproducibility of their work.
-
-- [Project-oriented workflow](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
-- [Folder structures](https://psych-transparency-guide.uni-koeln.de/folder-structure.html)
-- [Naming things](https://betterprogramming.pub/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841?gi=3295916e039)
+- listwise (or pairwise) deletion
+- mean imputation
+- last observation carried forward
 - ...
-
-<!-- also mention/discuss file paths here? relative vs. absolute -->
-
+- single imputation
+- stochastic imputation
+]
 ---
 
-# Exercise: Folder structures
-
-If you feel comfortable with that, feel free to share screenshots of some of your project folders. You can choose examples that you think are particularly well-organized as well as negative examples from your "dark past" as someone whose research might have been difficult to reproduce.
-
----
-
-<!-- Johannes takes over from here -->
-
-# Sharing is caring
+# Modern Methods
 
 .small[
 One prerequisite for research being reproducible (by others) is sharing research materials. There are many parts of their work that researchers can share to increase the reproducibility as well as the (potential) replicability of their work (see Klein et al., 2018). Four main types of output are:
@@ -253,88 +284,6 @@ One prerequisite for research being reproducible (by others) is sharing research
 4. (Detailed) Information about the study procedure
 
 Notably, all of these outputs should be well-documented (e.g., via README files, metadata or comments in code).
-]
-
----
-
-# Sharing for reproducibility
-
-While sharing study materials and information about the procedure are important for replicability, for reproducibility, the most important things to share are the data and code.
-
----
-
-# Sharing data & code
-
-There are many different ways in which researchers can share their data and code/scripts (see Klein et al., 2018). Keeping only local copies of things and sharing upon personal request is not a very sustainable or scalable solution. The better option is sharing via institutional or public archives and repositories.
-
----
-
-# Fantastic repositories and where to find them `r ji("dragon")`
-
-The paper by [Klein et al. (2018)](https://doi.org/10.1525/collabra.158) provides an overview of public repositories that hold psychological data.<sup>1</sup>
-A good tool for finding suitable repositories is the [*Registry of Research Data Repositories*](https://www.re3data.org/).
-
-<small><small>[1] However, parts of this overview have inevitably become somewhat outdated since the paper was published.</small></small>
-
-
----
-
-# How to choose a repository
-
-In general, research data (and code) that are publicly archived should follow the so-called [FAIR principles](https://www.go-fair.org/fair-principles/) ([Wilkinson et al., 2016](https://doi.org/10.1038/sdata.2016.18)), meaning that the shared materials should be...
-
-- **F**indable: Persistent identifiers; metadata; indexed
-- **A**ccessible: Retrievable by identifier; controlled access where necessary
-- **I**nteroperable: Standardized metadata; open, lightweight, and interoperable file formats (e.g., CSV, TSV, JSON, ODS)
-- **R**eusable: Documented; clear usage license
-
----
-
-# How to choose a repository
-
-Some more specific key criteria for choosing a repository are that it should...
-
-- use persistent and unique identifiers (such as DOIs)
-- accommodate licensing
-- feature access controls (e.g., allowing the restriction of 
-access to a particular set of users)
-- have persistence guarantees for long-term access
-- store data in accordance with local legislation (e.g. the [GDPR](https://gdpr.eu/) in Europe)
-
-.small[See [Klein et al., (2018)](https://doi.org/10.1525/collabra.158) for further details
-]
-
----
-
-# Public archiving options
-
-Two archiving options that are quite popular among researchers (esp. also in psychology) are the [*Open Science Framework*](https://osf.io/) (OSF) and [*Zenodo*](https://zenodo.org/). 
-
---
-
-While these two archives are not curated, which somewhat reduces findability, they are quite flexible and easy to use. They can be used to share different types of content, including data and code, and also offer some degree of access control. A nice feature of the *OSF* and *Zenodo*, especially for sharing code, is that they offer integration with *GitHub* (which facilitates version control).
-
----
-
-# Tools & tool stacks
-
-As you probably already know, there are lots of different tools and workflows that can be used to increase the reproducibility of research. These tools can then be combined into different tool stacks. We will introduce you to some of those in this workshop, but there are many more, and, in the end, it depends on your personal preferences and needs what tools/tool stacks and workflows you (should) employ.<sup>1</sup>
-
-<small><small>[1] As you will see, the two of us also have different preferences in our workflows and tool use.</small></small>
-
----
-
-# Tools in this workshop
-
-As stated before, we will focus on the following tools for reproducible research in this workshop:
-
-- Git & *GitHub*/*GitLab*
-- R Markdown
-
-We will focus on using them via *RStudio*.
-
-.small[
-*Note:* In the outlook part, we will also briefly introduce some other/additional tools.
 ]
 
 ---
