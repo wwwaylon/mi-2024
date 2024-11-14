@@ -3,10 +3,8 @@ title     : "Exercises: "
 subtitle  : "Title"
 ---
 
-```{r child = "_setup.`{block, box.title = "Exercise 1", box.body = list(fill = "white"), box.icon = "fa-star"}
-This is question 1.
+```{r child = "_setup.Rmd"}
 ```
-
 
 ```{block, box.title = "Exercise 1", box.body = list(fill = "white"), box.icon = "fa-star"}
 What is multiple imputation, and why is it often preferred over other methods for handling missing data?
