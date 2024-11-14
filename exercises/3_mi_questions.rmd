@@ -8,10 +8,9 @@ This is question 1.
 ```
 
 
-Got it! Here are the 10 questions in plain text, formatted as requested with code blocks:
-
-{block, box.title = "Exercise 1", box.body = list(fill = "white"), box.icon = "fa-star"}
+```{block, box.title = "Exercise 1", box.body = list(fill = "white"), box.icon = "fa-star"}
 What is multiple imputation, and why is it often preferred over other methods for handling missing data?
+```
 
 {block, opts.label = "clues", box.icon = "fa-lightbulb"}
 Consider the strengths of multiple imputation in providing unbiased estimates and addressing uncertainty.
