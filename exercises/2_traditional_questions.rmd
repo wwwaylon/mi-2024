@@ -1,0 +1,18 @@
+---
+title     : "Exercises: "
+subtitle  : "Title"
+---
+
+```{r child = "_setup.Rmd"}
+```
+
+```{block, box.title = "Exercise 1", box.body = list(fill = "white"), box.icon = "fa-star"}
+What is multiple imputation, and why is it often preferred over other methods for handling missing data?
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Consider the strengths of multiple imputation in providing unbiased estimates and addressing uncertainty.
+```
+
+```{block, box.title = "Solution 1", box.icon = "fa-check", solution = T}
+Multiple imputation is a statistical method where missing values are replaced by multiple sets of simulated values to allow for accurate estimation. It helps address uncertainty by creating several completed datasets, each analyzed to produce pooled results.
