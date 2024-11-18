@@ -1,0 +1,133 @@
+---
+title     : "Exercises: "
+subtitle  : "Title"
+---
+
+```{r child = "_setup.Rmd"}
+```
+
+```{block, box.title = "Exercise 1", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 1", box.icon = "fa-check", solution = T}
+qqq
+```
+
+
+```{block, box.title = "Exercise 2", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 2", box.icon = "fa-check", solution = T}
+qqq
+```
+
+```{block, box.title = "Exercise 3", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 3", box.icon = "fa-check", solution = T}
+qqq
+```
+
+
+```{block, box.title = "Exercise 4", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 4", box.icon = "fa-check", solution = T}
+qqq
+```
+
+```{block, box.title = "Exercise 5", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 5", box.icon = "fa-check", solution = T}
+qqq
+```
+
+```{block, box.title = "Exercise 6", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 6", box.icon = "fa-check", solution = T}
+qqq
+```
+
+
+```{block, box.title = "Exercise 7", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 7", box.icon = "fa-check", solution = T}
+qqq
+```
+
+```{block, box.title = "Exercise 8", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 8", box.icon = "fa-check", solution = T}
+qqq
+```
+
+
+```{block, box.title = "Exercise 9", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 9", box.icon = "fa-check", solution = T}
+qqq
+```
+
+```{block, box.title = "Exercise 10", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 10", box.icon = "fa-check", solution = T}
+qqq
+```
+
+
