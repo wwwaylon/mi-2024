@@ -1,0 +1,26 @@
+---
+title     : "Exercises: "
+subtitle  : "Title"
+---
+
+```{r child = "_setup.Rmd"}
+```
+
+```{block, box.title = "Exercise 1", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 1", box.icon = "fa-check", solution = T}
+qqq
+```
+
+
+
+
+
+
+
