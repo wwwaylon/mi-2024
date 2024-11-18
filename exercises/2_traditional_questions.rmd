@@ -172,4 +172,3 @@ Hint: Reflect on how different missing data mechanisms impact your analysis.
 Solution 10:
 Ignoring the nature of missing data can result in biased estimates and misleading conclusions. For example, if data are missing not at random (MNAR), traditional methods like listwise deletion or mean imputation may exacerbate the bias, leading to invalid inferences. Understanding the missing data mechanism is crucial for choosing appropriate methods and ensuring valid analysis.
 
-These questions, hints, and solutions highlight various issues with traditional missing data handling techniques and emphasize the importance of understanding missing data mechanisms and using more robust methods like multiple imputation.
