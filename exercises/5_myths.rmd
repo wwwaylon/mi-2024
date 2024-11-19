@@ -1,0 +1,189 @@
+---
+title     : "Exercises: "
+subtitle  : "Title"
+---
+
+```{r child = "_setup.Rmd"}
+```
+
+```{block, box.title = "Exercise 1", box.body = list(fill = "white"), box.icon = "fa-star"}
+Does imputation create fake data?
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Consider how imputation works.
+```
+
+```{block, box.title = "Solution 1", box.icon = "fa-check", solution = T}
+Imputation estimates plausible values for missing data based on observed relationships in the dataset. These estimates account for the uncertainty in the data and are designed to preserve the statistical properties of the dataset. Imputation improves analysis accuracy compared to ignoring missing data or using simplistic methods like mean substitution.
+```
+
+
+```{block, box.title = "Exercise 2", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 2", box.icon = "fa-check", solution = T}
+qqq
+```
+
+```{block, box.title = "Exercise 3", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 3", box.icon = "fa-check", solution = T}
+qqq
+```
+
+
+```{block, box.title = "Exercise 4", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 4", box.icon = "fa-check", solution = T}
+qqq
+```
+
+```{block, box.title = "Exercise 5", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 5", box.icon = "fa-check", solution = T}
+qqq
+```
+
+```{block, box.title = "Exercise 6", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 6", box.icon = "fa-check", solution = T}
+qqq
+```
+
+
+```{block, box.title = "Exercise 7", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 7", box.icon = "fa-check", solution = T}
+qqq
+```
+
+```{block, box.title = "Exercise 8", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 8", box.icon = "fa-check", solution = T}
+qqq
+```
+
+
+```{block, box.title = "Exercise 9", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 9", box.icon = "fa-check", solution = T}
+qqq
+```
+
+```{block, box.title = "Exercise 10", box.body = list(fill = "white"), box.icon = "fa-star"}
+qqq
+```
+
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+qqq
+```
+
+```{block, box.title = "Solution 10", box.icon = "fa-check", solution = T}
+qqq
+```
+
+
+
+Here are 10 questions and answers addressing common myths about missing data handling, drawing from Graham’s 2009 article, Missing Data: Making It Work in the Real World:
+
+1. Myth: 
+
+Q: 
+A: No. 
+
+2. Myth: Mean substitution is a valid way to handle missing data.
+
+Q: Why is mean substitution discouraged?
+A: Mean substitution distorts the variance and relationships among variables, leading to biased results. It underestimates variability and weakens statistical inferences, making it a poor choice compared to modern methods like multiple imputation or maximum likelihood.
+
+3. Myth: Listwise deletion is always the safest option.
+
+Q: Is listwise deletion the best approach to handle missing data?
+A: No. Listwise deletion can lead to biased results if the missing data are not missing completely at random (MCAR). It also reduces sample size, lowering statistical power. Modern methods like multiple imputation or maximum likelihood are preferable in most cases.
+
+4. Myth: Multiple imputation assumes normality of the data.
+
+Q: Does multiple imputation require normally distributed data?
+A: No. While traditional multiple imputation methods often assume multivariate normality, modern approaches can handle deviations from normality by using transformations, predictive mean matching, or alternative algorithms like chained equations.
+
+5. Myth: Handling missing data is only necessary for large datasets.
+
+Q: Is it important to handle missing data in small datasets?
+A: Yes. Missing data can bias results regardless of dataset size. In small datasets, the loss of information can be even more detrimental, and modern techniques like multiple imputation help preserve the integrity of small datasets.
+
+6. Myth: Only statisticians need to worry about missing data.
+
+Q: Is handling missing data a concern for non-statisticians?
+A: Yes. Researchers from all fields should understand basic principles of missing data handling because it directly affects the validity and reliability of their conclusions. Graham (2009) emphasizes the importance of using proper methods to ensure accurate results.
+
+7. Myth: Modern missing data techniques are too complex to implement.
+
+Q: Are modern methods like multiple imputation and maximum likelihood too difficult to use?
+A: No. User-friendly software like R, SAS, and SPSS provides accessible tools for handling missing data. While understanding the underlying principles is important, implementing these techniques has become much more straightforward.
+
+8. Myth: Multiple imputation always overestimates variability.
+
+Q: Does multiple imputation inflate variability in results?
+A: No. Multiple imputation incorporates the uncertainty of missing data by generating multiple plausible datasets and combining results. This process ensures accurate standard errors and confidence intervals rather than artificially inflating variability.
+
+9. Myth: Missing data methods work poorly for high percentages of missingness.
+
+Q: Can modern methods handle high percentages of missing data?
+A: Yes, though results depend on the missing data mechanism (MCAR, MAR, or MNAR) and the quality of auxiliary variables included in the analysis. With appropriate techniques like multiple imputation or maximum likelihood, even datasets with substantial missingness can yield valid results.
+
+10. Myth: All missing data methods assume data are missing at random (MAR).
+
+Q: Are missing data methods ineffective for data not missing at random (NMAR)?
+A: While MAR is a common assumption for methods like multiple imputation, some advanced techniques (e.g., selection models, pattern-mixture models) address NMAR situations. Understanding the missingness mechanism is crucial to selecting the appropriate method.
+
+These questions and answers emphasize the importance of understanding and addressing misconceptions about missing data, as highlighted by Graham (2009).
+
+
