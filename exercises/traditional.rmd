@@ -1,83 +1,154 @@
-Here are 10 questions, hints, and solutions about the problems with traditional missing data handling techniques:
+---
+title     : "Exercises: "
+subtitle  : "Handling Missing Data in Research: A Practical Guide"
+---
 
-Exercise 1:
+```{r child = "_setup.Rmd"}
+```
+
+
+```{block, opts.label = "exercise", box.title = "Exercise 1", box.body = list(fill = "white"), box.icon = "fa-star"}
 What is the main problem with listwise deletion as a method for handling missing data?
+```
 
-Hint: Consider how data are excluded and how it might affect your sample.
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Consider how data are excluded and how it might affect your sample.
+```
 
-Solution 1:
+```{block, box.title = "Solution 1", box.icon = "fa-check", solution = FALSE}
 Listwise deletion removes entire cases with missing data, which can lead to biased estimates if the data are not missing completely at random (MCAR). It also reduces sample size, potentially diminishing statistical power.
+```
 
-Exercise 2:
+
+
+```{block, opts.label = "exercise", box.title = "Exercise 2", box.body = list(fill = "white"), box.icon = "fa-star"}
 How does pairwise deletion differ from listwise deletion, and what is its potential drawback?
+```
 
-Hint: Think about how pairwise deletion handles missing data in correlation or covariance calculations.
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Think about how pairwise deletion handles missing data in correlation or covariance calculations.
+```
 
-Solution 2:
+```{block, box.title = "Solution 2", box.icon = "fa-check", solution = FALSE}
 Pairwise deletion uses available data for each pair of variables, allowing for more data points in calculations. However, it can lead to inconsistent results because different sample sizes are used for each pair of variables, potentially leading to biased correlations or covariances.
+```
 
-Exercise 3:
+
+
+```{block, opts.label = "exercise", box.title = "Exercise 3", box.body = list(fill = "white"), box.icon = "fa-star"}
 What is the issue with mean imputation in terms of the distribution of your data?
+```
 
-Hint: Consider what happens to the variability in your data when missing values are replaced by the mean.
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Consider what happens to the variability in your data when missing values are replaced by the mean.
+```
 
-Solution 3:
+```{block, box.title = "Solution 3", box.icon = "fa-check", solution = FALSE}
 Mean imputation replaces missing values with the mean of the observed data, which reduces variability and distorts the data distribution. This method can lead to biased parameter estimates and underestimate standard errors, ultimately affecting statistical inference.
+```
 
-Exercise 4:
+
+
+
+```{block, opts.label = "exercise", box.title = "Exercise 4", box.body = list(fill = "white"), box.icon = "fa-star"}
 Why is last observation carried forward (LOCF) a problematic technique for handling missing data in longitudinal studies?
+```
 
-Hint: Think about how LOCF handles missing values based on past observations and its potential limitations in representing future outcomes.
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Think about how LOCF handles missing values based on past observations and its potential limitations in representing future outcomes.
+```
 
-Solution 4:
+```{block, box.title = "Solution 4", box.icon = "fa-check", solution = FALSE}
 LOCF assumes that the last observed value remains valid for missing time points, which can lead to biased estimates, particularly if the data change over time. It also ignores the natural variability in the data and may misrepresent the true trajectory of outcomes.
+```
 
-Exercise 5:
+
+
+
+```{block, opts.label = "exercise", box.title = "Exercise 5", box.body = list(fill = "white"), box.icon = "fa-star"}
 What is the risk of bias when using imputation techniques without accounting for the pattern of missingness in the data?
+```
 
-Hint: Consider how the missing data mechanism can influence the quality of imputations.
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Consider how the missing data mechanism can influence the quality of imputations.
+```
 
-Solution 5:
+```{block, box.title = "Solution 5", box.icon = "fa-check", solution = FALSE}
 When missing data is not properly accounted for, it can lead to biased imputations. For instance, using techniques that assume data are missing completely at random (MCAR) when they are not can lead to inaccurate results. This violates assumptions about the missing data mechanism and undermines the validity of the analysis.
+```
 
-Exercise 6:
+
+
+
+```{block, opts.label = "exercise", box.title = "Exercise 6", box.body = list(fill = "white"), box.icon = "fa-star"}
 What are the potential issues with imputing missing data based solely on a univariate approach?
+```
 
-Hint: Think about the relationships between variables and whether they are adequately captured.
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Think about the relationships between variables and whether they are adequately captured.
+```
 
-Solution 6:
+```{block, box.title = "Solution 6", box.icon = "fa-check", solution = FALSE}
 Imputing missing data using a univariate approach (e.g., replacing missing values with the mean) does not account for the relationships between variables. This can lead to inaccurate imputations, especially when variables are correlated, and can fail to preserve the structure of the data.
+```
 
-Exercise 7:
+
+
+
+```{block, opts.label = "exercise", box.title = "Exercise 7", box.body = list(fill = "white"), box.icon = "fa-star"}
 What is the problem with using regression imputation without validating the assumptions of the regression model?
+```
 
-Hint: Consider how the assumptions of the regression model might affect the accuracy of imputations.
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Consider how the assumptions of the regression model might affect the accuracy of imputations.
+```
 
-Solution 7:
+```{block, box.title = "Solution 7", box.icon = "fa-check", solution = FALSE}
 Regression imputation assumes that the relationship between variables is correctly modeled. If the assumptions of linearity, homoscedasticity, or normality are violated, the imputed values can be biased, leading to inaccurate estimates and misleading conclusions.
+```
 
-Exercise 8:
+
+
+
+```{block, opts.label = "exercise", box.title = "Exercise 8", box.body = list(fill = "white"), box.icon = "fa-star"}
 Why might imputation methods that ignore uncertainty lead to flawed conclusions?
+```
 
-Hint: Think about the importance of incorporating uncertainty in the imputation process.
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Think about the importance of incorporating uncertainty in the imputation process.
+```
 
-Solution 8:
+```{block, box.title = "Solution 8", box.icon = "fa-check", solution = FALSE}
 Imputation methods that ignore uncertainty, such as single imputation, provide a single value for each missing data point, which underestimates the variability of the estimates. This can lead to biased results, as the uncertainty in the missing data is not adequately reflected in the analysis.
+```
 
-Exercise 9:
+
+
+```{block, opts.label = "exercise", box.title = "Exercise 9", box.body = list(fill = "white"), box.icon = "fa-star"}
 What is the impact of using overly simplistic missing data handling techniques in large datasets?
+```
 
-Hint: Consider how simplicity might affect the complexity and accuracy of the results in large datasets.
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Consider how simplicity might affect the complexity and accuracy of the results in large datasets.
+```
 
-Solution 9:
+```{block, box.title = "Solution 9", box.icon = "fa-check", solution = FALSE}
 Simplistic techniques, such as mean imputation or listwise deletion, can lead to significant biases and loss of information in large datasets. These methods fail to preserve the complex relationships between variables, and can lead to misleading conclusions, especially when the missingness is not random.
+```
 
-Exercise 10:
+
+
+
+```{block, opts.label = "exercise", box.title = "Exercise 10", box.body = list(fill = "white"), box.icon = "fa-star"}
 How does ignoring the nature of missing data (e.g., missing at random, missing not at random) affect the validity of statistical analysis?
+```
 
-Hint: Reflect on how different missing data mechanisms impact your analysis.
+```{block, opts.label = "clues", box.icon = "fa-lightbulb"}
+Reflect on how different missing data mechanisms impact your analysis.
+```
 
-Solution 10:
+```{block, box.title = "Solution 10", box.icon = "fa-check", solution = FALSE}
 Ignoring the nature of missing data can result in biased estimates and misleading conclusions. For example, if data are missing not at random (MNAR), traditional methods like listwise deletion or mean imputation may exacerbate the bias, leading to invalid inferences. Understanding the missing data mechanism is crucial for choosing appropriate methods and ensuring valid analysis.
+```
 
-These questions, hints, and solutions highlight various issues with traditional missing data handling techniques and emphasize the importance of understanding missing data mechanisms and using more robust methods like multiple imputation.
+

@@ -16,11 +16,19 @@ exclude: true
 
 ---
 
+## navigating research complexities
+
+```{r, out.width = "65%", echo = F}
+include_graphics("./img/napkin.jpg")
+```
+
+---
+
 #  About me
 
 [Waylon Howard](https://wwwaylon.github.io/)
 
-- Principal Quantitative Methodologist and Biostatistician at [*Biostatistics, Epidemiology and Analytics in Research (BEAR) Core*](https://www.seattlechildrens.org/research/resources/bear) (Seattle Children's Research Integration Hub) 
+- Principal Quantitative Methodologist and Biostatistician at [*Biostatistics, Epidemiology and Analytics in Research (BEAR) Core*](https://www.seattlechildrens.org/research/resources/bear) (Seattle Children's Research Informatics and Biostatistics) 
 
 --
   - Research methods, statistics, and measurement
@@ -48,20 +56,7 @@ https://github.com/wwwaylon/mi-2024
 
 - The session consists of a combination of lectures and hands-on exercises
 - Feel free to ask questions anytime
-- We will have frequent breaks (presentation in sections)
-
----
-
-# Preliminaries
-
-Did you have any trouble with the setup for this session?
-
-Installing...
-
-- [`GitHub`](https://github.com/)
-- [`R`](https://www.r-project.org/) & [*RStudio*](https://www.rstudio.com/products/rstudio/)
-- a `TeX` distribution (e.g., [TinyTeX](https://yihui.name/tinytex/))
-- [`papaja`](https://github.com/crsh/papaja)
+- We will primarily rely on [`GitHub`](https://github.com/), [`R`](https://www.r-project.org/) & [*RStudio*](https://www.rstudio.com/products/rstudio/) with additional support for [`SAS`](https://www.sas.com/en_us/home.html) and even [`Excel`](https://www.microsoft.com/en-us/microsoft-365/excel). 
 
 ---
 
@@ -71,9 +66,9 @@ Installing...
 
 ```{r schedule Wed, echo = F}
 schedule <- data.frame(
-  "When?" = c("12:00 - 12:30", "12:30 - 1:00", "1:00 - 1:30", "1:30 - 2:00")
+  "When?" = c("12:00 - 12:30", "12:30 - 1:00", "1:00 - 1:45", "1:45 - 2:00")
   , "&nbsp;" = "&nbsp;"
-  , "What?" = c("Introduction: Missing Data", "<i>Traditional Methods</i>", "MI & FIML", "<i>Auxiliary Variables</i>")
+  , "What?" = c("Introduction", "Traditional Methods", "Modern Methods", "<i>Questions</i>")
   , check.names = FALSE
 )
 knitr::kable(
@@ -137,7 +132,11 @@ Illustration adapted from [Little, T. D. (2024)](https://www.guilford.com/books/
 
 ---
 
-# MAR - MNAR continuum `r ji("surprised")`
+```{r}
+# https://emojipedia.org/
+```
+
+# MAR - MNAR continuum `r emo::ji("astonished")`
 
 > These three kinds of missingness .highlight[should not be thought of as mutually exclusive categories of missingness], despite the fact that they are often misperceived as such... The best way to think of all missing data is as a continuum between MAR and MNAR ([Graham, J. W., 2009](https://web.archive.org/web/20170808222256id_/http://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/emalgm?action=AttachFile&do=get&target=graham.pdf), p. 567).
 
@@ -235,7 +234,7 @@ ggplot(data = data, mapping = aes(x = var1, y = var2)) +
     axis.line = element_line(color = "#A7A9AC", size = 1.5),
     axis.ticks = element_line(size = 1.2),
     axis.ticks.length = unit(0.25, "cm"),
-    text = element_text(family = "Arial", color = "#4B4F54")
+    text = element_text(color = "#4B4F54")
   ) 
 
 
@@ -262,7 +261,8 @@ knitr::kable(
 
 # Traditional Methods
 
-.small[I will highlight some traditional ways of thinking about and approaching the problem of missing data. While these techniques are straightforward, they have important limitations to consider.
+.small[
+We will highlight some traditional ways of thinking about and approaching the problem of missing data. While these techniques are straightforward, they have important limitations to consider.
 
 - listwise (or pairwise) deletion
 - mean imputation
@@ -276,15 +276,10 @@ knitr::kable(
 # Modern Methods
 
 .small[
-One prerequisite for research being reproducible (by others) is sharing research materials. There are many parts of their work that researchers can share to increase the reproducibility as well as the (potential) replicability of their work (see Klein et al., 2018). Four main types of output are:
-
-1. Data
-2. Code & scripts (for data collection, processing, and analysis)
-3. Other study materials (e.g., questionnaires or stimulus materials)
-4. (Detailed) Information about the study procedure
-
-Notably, all of these outputs should be well-documented (e.g., via README files, metadata or comments in code).
+We will then get into more sophisticated methods, such as Full Information Maximum Likelihood (FIML) and Multiple Imputation (MI) which offer more robust solutions by using all available data and accounting for uncertainty associated with missing values, leading to more reliable and valid inferences.<sup>1</sup>
 ]
+
+<small><small>[1] Although the algorithms used by stats programs can be quite complex, I will focus on presenting the core concepts in a way that's easy to understand.</small></small>
 
 ---
 

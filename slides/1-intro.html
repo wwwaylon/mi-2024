@@ -3,7 +3,7 @@
   <head>
     <title>Handling Missing Data in Research: A Practical Guide</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Author Name" />
+    <meta name="author" content="Waylon Howard" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view/tile-view.js"></script>
@@ -27,10 +27,10 @@ class: center, middle, inverse, title-slide
 ## <small>Introduction</small>
 ]
 .author[
-### Author Name
+### Waylon Howard
 ]
 .date[
-### Placeholder Location, Placeholder Date
+### Webinar, November 19, 2024
 ]
 
 ---
@@ -47,11 +47,17 @@ exclude: true
 
 ---
 
+## navigating research complexities
+
+&lt;img src="./img/napkin.jpg" width="65%" style="display: block; margin: auto;" /&gt;
+
+---
+
 #  About me
 
 [Waylon Howard](https://wwwaylon.github.io/)
 
-- Principal Quantitative Methodologist and Biostatistician at [*Biostatistics, Epidemiology and Analytics in Research (BEAR) Core*](https://www.seattlechildrens.org/research/resources/bear) (Seattle Children's Research Integration Hub) 
+- Principal Quantitative Methodologist and Biostatistician at [*Biostatistics, Epidemiology and Analytics in Research (BEAR) Core*](https://www.seattlechildrens.org/research/resources/bear) (Seattle Children's Research Informatics and Biostatistics) 
 
 --
   - Research methods, statistics, and measurement
@@ -79,20 +85,7 @@ https://github.com/wwwaylon/mi-2024
 
 - The session consists of a combination of lectures and hands-on exercises
 - Feel free to ask questions anytime
-- We will have frequent breaks (presentation in sections)
-
----
-
-# Preliminaries
-
-Did you have any trouble with the setup for this session?
-
-Installing...
-
-- [`GitHub`](https://github.com/)
-- [`R`](https://www.r-project.org/) &amp; [*RStudio*](https://www.rstudio.com/products/rstudio/)
-- a `TeX` distribution (e.g., [TinyTeX](https://yihui.name/tinytex/))
-- [`papaja`](https://github.com/crsh/papaja)
+- We will primarily rely on [`GitHub`](https://github.com/), [`R`](https://www.r-project.org/) &amp; [*RStudio*](https://www.rstudio.com/products/rstudio/) with additional support for [`SAS`](https://www.sas.com/en_us/home.html) and even [`Excel`](https://www.microsoft.com/en-us/microsoft-365/excel). 
 
 ---
 
@@ -112,22 +105,22 @@ Installing...
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; 12:00 - 12:30 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; &amp;nbsp; &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Introduction: Missing Data &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Introduction &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; 12:30 - 1:00 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; &amp;nbsp; &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; &lt;i&gt;Traditional Methods&lt;/i&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Traditional Methods &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; 1:00 - 1:30 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1:00 - 1:45 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; &amp;nbsp; &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; MI &amp; FIML &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Modern Methods &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; 1:30 - 2:00 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1:45 - 2:00 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; &amp;nbsp; &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; &lt;i&gt;Auxiliary Variables&lt;/i&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; &lt;i&gt;Questions&lt;/i&gt; &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -179,7 +172,9 @@ Illustration adapted from [Little, T. D. (2024)](https://www.guilford.com/books/
 
 ---
 
-# MAR - MNAR continuum 🙀
+
+
+# MAR - MNAR continuum 😲
 
 &gt; These three kinds of missingness .highlight[should not be thought of as mutually exclusive categories of missingness], despite the fact that they are often misperceived as such... The best way to think of all missing data is as a continuum between MAR and MNAR ([Graham, J. W., 2009](https://web.archive.org/web/20170808222256id_/http://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/emalgm?action=AttachFile&amp;do=get&amp;target=graham.pdf), p. 567).
 
@@ -443,7 +438,8 @@ Descriptive Statistics
 
 # Traditional Methods
 
-.small[I will highlight some traditional ways of thinking about and approaching the problem of missing data. While these techniques are straightforward, they have important limitations to consider.
+.small[
+We will highlight some traditional ways of thinking about and approaching the problem of missing data. While these techniques are straightforward, they have important limitations to consider.
 
 - listwise (or pairwise) deletion
 - mean imputation
@@ -457,15 +453,10 @@ Descriptive Statistics
 # Modern Methods
 
 .small[
-One prerequisite for research being reproducible (by others) is sharing research materials. There are many parts of their work that researchers can share to increase the reproducibility as well as the (potential) replicability of their work (see Klein et al., 2018). Four main types of output are:
-
-1. Data
-2. Code &amp; scripts (for data collection, processing, and analysis)
-3. Other study materials (e.g., questionnaires or stimulus materials)
-4. (Detailed) Information about the study procedure
-
-Notably, all of these outputs should be well-documented (e.g., via README files, metadata or comments in code).
+We will then get into more sophisticated methods, such as Full Information Maximum Likelihood (FIML) and Multiple Imputation (MI) which offer more robust solutions by using all available data and accounting for uncertainty associated with missing values, leading to more reliable and valid inferences.&lt;sup&gt;1&lt;/sup&gt;
 ]
+
+&lt;small&gt;&lt;small&gt;[1] Although the algorithms used by stats programs can be quite complex, I will focus on presenting the core concepts in a way that's easy to understand.&lt;/small&gt;&lt;/small&gt;
 
 ---
 

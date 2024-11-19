@@ -1,13 +1,13 @@
 ---
 title     : "Exercises: "
-subtitle  : "Reproducible research workflows for psychologists"
+subtitle  : "Handling Missing Data in Research: A Practical Guide"
 ---
 
 ```{r child = "_setup.Rmd"}
 ```
 
 
-```{block, box.title = "Exercise 1", box.body = list(fill = "white"), box.icon = "fa-star"}
+```{block, opts.label = "exercise", box.title = "Exercise 1", box.body = list(fill = "white"), box.icon = "fa-star"}
 Which missing data mechanism occurs when the probability of missingness is unrelated to both observed and unobserved data?
 ```
 
@@ -15,7 +15,7 @@ Which missing data mechanism occurs when the probability of missingness is unrel
 Think about a situation where missing data occurs purely by chance.
 ```
 
-```{block, box.title = "Solution 1", box.icon = "fa-check", solution = F}
+```{block, box.title = "Solution 1", box.icon = "fa-check", solution = FALSE}
 The correct answer is Missing Completely at Random (MCAR).
 ```
 

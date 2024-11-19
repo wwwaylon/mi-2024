@@ -9,8 +9,24 @@ knitr::opts_template$set(
     , box.header = list(fill = "#ffec8b", colour = "black")
     , box.icon = "fa-search"
     , box.collapse = TRUE
-  )
+  ), 
+    solution = list(
+    box.title = "Solution"
+    , box.body = list(fill = "#e6f9dc", colour = "black")
+    , box.header = list(fill = "#d4f5a1", colour = "black")
+    , box.icon = "fa-search"
+    , box.collapse = TRUE
+), 
+    exercise = list(
+    box.title = "Exercise"
+    , box.body = list(fill = "#dcefff", colour = "black")
+    , box.header = list(fill = "#a1d4f5", colour = "black")
+    , box.icon = "fa-search"
+    , box.collapse = FALSE
 )
+)
+
+
 ```
 
 ```{r klippy, echo = FALSE}

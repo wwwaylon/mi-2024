@@ -1,0 +1,670 @@
+---
+title: "Handling Missing Data in Research: A Practical Guide"
+subtitle  : "<small>Multiple Imputation</small>"
+author: "`r paste(params$author, collapse = ' & ')`"
+date: "`r paste0(params$location, ', ', params$date)`"
+params:
+  author: ["Author Name"]
+  date: "Placeholder Date"
+  location: "Placeholder Location"
+---
+exclude: true
+
+```{r child = "_setup.Rmd"}
+```
+
+
+---
+class: left, middle
+
+.center[
+## Multiple Imputation 
+]
+
+.pull-right-60[
+
+```{r out.extra = "style='float:center;'", out.width = "600px"}
+include_graphics(here::here("slides", "img", "mi.png"))
+```
+<small><small>Illustration adapted from [Enders, C. K. (2022)](https://www.guilford.com/books/Applied-Missing-Data-Analysis/Craig-Enders/9781462549863).</small></small>
+
+]
+
+.pull-left-30[
+
+**A three-step process**
+
+<small>1. Imputation Phase</small><small><small><sup>1</sup></small></small>  
+<small>2. Analysis Phase</small>  
+<small>3. Pooling Phase</small> 
+
+<small><small>[1] A wide range of algorithms exists to tackle various types of data.</small></small>
+
+]
+
+---
+
+class: center, middle
+
+.pull-right-50[
+
+<small>*possible* regression lines</small>
+
+<small><small>
+$\text{var2}_i^* = \left[\color{#8DC63F}{\hat{\beta}_0} + \color{#8DC63F}{\hat{\beta}_1} (\text{var1}_i)\right] + z_i$
+</small></small>
+
+```{r, out.width = "450px", out.height = "200px", echo = F, message=FALSE, warning=FALSE, dpi = 300}
+
+library(dplyr)
+library(ggplot2)
+library(smplot2)
+
+# Data for each row in the table
+ID <- 1:20
+var1 <- c(36.6, 41.8, 42.6, 43.1, 43.4, 44.2, 44.9, 46.3, 48.6, 49.0, 
+            50.0, 51.6, 54.6, 54.8, 55.7, 57.2, 57.6, 60.3, 60.9, 65.3)
+var2 <- c(40.0, 40.0, 35.0, 43.0, 42.6, 39.0, 45.0, 45.2, 50.0, 40.0, 
+            45.0, 44.7, 48.5, 50.2, 42.8, 50.0, 54.0, 52.0, 58.0, 60.0)
+
+# Create the main data frame
+datac <- data.frame(ID, var1, var2)
+
+# Calculate summary statistics
+mean_var1c <- round(mean(var1, na.rm=T),2)
+mean_var2c <- round(mean(var2, na.rm=T),2)
+sd_var1c <- round(sd(var1, na.rm=T),2)
+sd_var2c <- round(sd(var2, na.rm=T),2)
+
+cor_test <- cor.test(var1, var2, use = "complete.obs")
+correlc <- round(cor_test$estimate, 2)
+if(cor_test$p.value < .001) {
+  p_valuec <- "< .001"} else {
+  p_valuec <- paste0("= ", round(cor_test$p.value, 3)) }
+
+
+p1 <- ggplot(data = datac, mapping = aes(x = var1, y = var2)) +
+  geom_point(size = 7, color = "#00A9E0", alpha = 0.4) + # Increase point size
+  geom_smooth(method = "lm", se = FALSE, color = "#8DC63F", linewidth = 3.5, alpha = 0.2) +
+  theme_classic() +
+  scale_x_continuous(breaks = seq(20, 70, by = 10), limits = c(20, 70)) +  
+  scale_y_continuous(breaks = seq(20, 70, by = 10), limits = c(20, 70)) + 
+  sm_statCorr(color = "#8DC63F", text_size = 8) + 
+   theme(
+    plot.title = element_text(hjust = 0.5, size = 24),  # Increase title font size
+    axis.title = element_text(size = 18),  # Increase axis label font size
+    axis.text = element_text(size = 18),  # Increase tick label font size
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank(),
+    panel.border = element_blank(),
+    axis.line = element_line(color = "#A7A9AC", size = 1.5),
+    axis.ticks = element_line(size = 1.2),
+    axis.ticks.length = unit(0.25, "cm"),
+    text = element_text(color = "#4B4F54")
+  ) 
+
+
+# Data for each row in the table
+ID <- 1:20
+var1 <- c(36.6, 41.8, 42.6, 43.1, 43.4, 44.2, 44.9, 46.3, 48.6, 49.0, 
+            50.0, 51.6, 54.6, 54.8, 55.7, 57.2, 57.6, 60.3, 60.9, 65.3)
+var2 <- c(40.0, 40.0, 35.0, 43.0, 42.6, 39.0, 45.0, 45.2, 50.0, 40.0, 
+            NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)
+
+
+# Calculate summary statistics
+mean_var1m <- round(mean(var1, na.rm=T),2)
+mean_var2m <- round(mean(var2, na.rm=T),2)
+sd_var1m <- round(sd(var1, na.rm=T),2)
+sd_var2m <- round(sd(var2, na.rm=T),2)
+
+
+set.seed(4681)  # Setting a seed for reproducibility
+
+# Create a function to generate a frame for the scatter plot
+generate_frame <- function(i) {
+  
+  # Create sample data
+  random_error <- rnorm(20, mean = 0, sd = 3.51)
+
+  # Calculate the predicted values for var2 with random error
+  model <- lm(var2 ~ var1)
+  
+  # Extract the intercept and slope
+  intercept <- coef(model)[1]
+  slope <- coef(model)[2]
+  
+  # Calculate the predicted values for var2
+  var2[11:20] <- intercept + slope * var1[11:20] + random_error[11:20]
+  
+  mean_var2m <- round(mean(var2, na.rm=T),2)
+  sd_var2m <- round(sd(var2, na.rm=T),2)
+
+  # Create the main data frame
+  datam <- data.frame(ID, var1, var2)
+
+  cor_test <- cor.test(var1, var2, use = "complete.obs")
+  correlm <- round(cor_test$estimate, 2)
+    if(cor_test$p.value < .001) {
+       p_valuem <- "< .001"} else {
+       p_valuem <- paste0("= ", round(cor_test$p.value, 3)) }
+  
+  
+  # Create the scatter plot with regression line
+p2 <- ggplot(data = datam, mapping = aes(x = var1, y = var2)) +
+  sm_statCorr(color = "white", text_size = 8) + 
+  
+  geom_point(data = datac, size = 7, color = "#00A9E0", alpha = 0.05) + # Increase point size
+  #geom_smooth(data = datac, method = "lm", se = FALSE, color = "#8DC63F", size = 3.5, alpha = 0.2) +
+  stat_smooth(data = datac, geom='line', method = "lm", alpha=0.08, se=FALSE, color = "#8DC63F", size = 3.5) +
+  
+  geom_point(data = datam, size = 7, color = "#00A9E0", alpha = 0.8) +
+  #geom_smooth(data = datam, method = "lm", se = FALSE, color = "#8DC63F", size = 3.5) +
+  stat_smooth(data = datam, geom='line', method = "lm", alpha=1, se=FALSE, color = "#8DC63F", size = 3.5) +
+  theme_classic() +
+  scale_x_continuous(breaks = seq(20, 70, by = 10), limits = c(20, 70)) +  
+  scale_y_continuous(breaks = seq(20, 70, by = 10), limits = c(20, 70)) + 
+  sm_statCorr(color = "#8DC63F", text_size = 8) + 
+   theme(
+    plot.title = element_text(hjust = 0.5, size = 24),  # Increase title font size
+    axis.title = element_text(size = 18),  # Increase axis label font size
+    axis.text = element_text(size = 18),  # Increase tick label font size
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank(),
+    panel.border = element_blank(),
+    axis.line = element_line(color = "#A7A9AC", size = 1.5),
+    axis.ticks = element_line(size = 1.2),
+    axis.ticks.length = unit(0.25, "cm"),
+    text = element_text(color = "#4B4F54")
+  ) 
+  
+  return(p2)
+}
+
+# Save the scatter plot as a GIF
+animation_filename <- here::here("slides", "img", "scatter_plot.gif")
+
+p3 <- animation::saveGIF({
+  for (i in 1:20) {
+    p <- generate_frame(i)
+    print(p)
+  }
+}, movie.name = animation_filename, interval = 0.50, ani.width = 500, ani.height = 450)
+
+```
+
+`r knitr::include_graphics(animation_filename)`
+
+]
+
+.pull-left-40[
+
+**Imputation Phase**
+
+<small>algorithm concept</small>
+
+```{r, out.width = "85%", echo = F}
+filename <- here::here("slides", "img", "mcmc-color.png")
+include_graphics(filename)
+```
+
+]
+
+---
+
+class: center, middle
+
+**Time-series plot**
+
+<small>algorithm convergence</small>
+
+```{r, out.width = "60%", echo = F}
+filename <- here::here("slides", "img", "trace-plot.png")
+include_graphics(filename)
+```
+
+---
+
+class: center, middle
+
+.pull-right-60[
+
+```{r, out.width = "450px", out.height = "425px", echo = F, message=FALSE, warning=FALSE, dpi = 300}
+library(dplyr)
+library(ggplot2)
+library(smplot2)
+
+# Data for each row in the table
+ID <- 1:20
+var1 <- c(36.6, 41.8, 42.6, 43.1, 43.4, 44.2, 44.9, 46.3, 48.6, 49.0, 
+            50.0, 51.6, 54.6, 54.8, 55.7, 57.2, 57.6, 60.3, 60.9, 65.3)
+var2 <- c(40.0, 40.0, 35.0, 43.0, 42.6, 39.0, 45.0, 45.2, 50.0, 40.0, 
+            45.0, 44.7, 48.5, 50.2, 42.8, 50.0, 54.0, 52.0, 58.0, 60.0)
+
+# Create the main data frame
+datac <- data.frame(ID, var1, var2)
+
+# Data for each row in the table
+ID <- 1:20
+var1 <- c(36.6, 41.8, 42.6, 43.1, 43.4, 44.2, 44.9, 46.3, 48.6, 49.0, 
+            50.0, 51.6, 54.6, 54.8, 55.7, 57.2, 57.6, 60.3, 60.9, 65.3)
+var2 <- c(40.0, 40.0, 35.0, 43.0, 42.6, 39.0, 45.0, 45.2, 50.0, 40.0, 
+            NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)
+
+# Create the main data frame
+datam <- data.frame(ID, var1, var2)
+
+#--- imputed data
+
+library(mice)
+
+# Set a seed for reproducibility
+imp <- mice(datam, m = 5, method = "norm", seed = 04061981, printFlag = FALSE)
+
+#plot(imp)
+
+# Create a list to store imputed datasets
+imputed_datasets <- list()
+for (i in 1:5) {
+  imputed_datasets[[i]] <- complete(imp, action = i)
+  assign(paste0("imputed_data", i), imputed_datasets[[i]])
+}
+
+# Create an empty list to store the var2 columns
+varimp <- list()
+
+# Loop through each imputed dataset to extract var2
+for (i in 1:5) {
+  # Extract the var2 column from the current imputed dataset
+  varimp[[i]] <- imputed_datasets[[i]]$var2
+}
+
+# Combine the var2 columns into a data frame (optional)
+varimp_df <- as.data.frame(varimp)
+colnames(varimp_df) <- paste0("imp", 1:5)
+
+```
+
+```{r, message = FALSE, warning = FALSE}
+
+varimp_df[, paste0("imp", 1:5)] <- lapply(varimp_df[, paste0("imp", 1:5)], function(x) sprintf("%.2f", x))
+
+# Create the table with kable and apply styling
+knitr::kable(
+  varimp_df,
+  format = "html",
+  align = "ll",
+  escape = FALSE
+) %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"), 
+    font_size = 13.5, full_width = TRUE
+  )
+
+```
+
+]
+
+.pull-left-10[
+
+### Analysis Phase
+
+<small>Run an analysis on each imputed data set separately.</small> 
+
+```{r}
+
+# Initialize an empty data frame to store results
+summary_table <- data.frame(Imputation = integer(), M = numeric(), SE = numeric(), r = numeric())
+
+# Loop through each imputed dataset
+for (i in 1:5) {
+  # Extract the current imputed dataset
+  current_data <- imputed_datasets[[i]]
+  
+  # Calculate the mean and SE for var2
+  mean_var2 <- mean(current_data$var2, na.rm = TRUE)
+  se_var2 <- sd(current_data$var2, na.rm = TRUE) / sqrt(nrow(current_data))
+  
+  # Calculate the correlation between var1 and var2
+  correlation <- cor(current_data$var1, current_data$var2, use = "complete.obs")
+  
+  # Append the results to the summary table
+  summary_table <- rbind(
+    summary_table,
+    data.frame(Imputation = i, M = mean_var2, SE = se_var2, r = correlation)
+  )
+}
+
+# Format the table with knitr and kableExtra
+knitr::kable(
+  summary_table,
+  format = "html",
+  align = "ll",
+  digits = 2, # Round numeric columns to 2 decimal places
+  col.names = c("Imputation", "Mean", "SE", "r"),
+  escape = FALSE
+) %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    font_size = 13.5,
+    full_width = TRUE
+  )
+
+# Initialize an empty data frame to store results
+summary_table <- data.frame(Imputation = integer(), M = numeric(), SE = numeric(), r = numeric())
+
+# Store separate results for pooling later
+means <- numeric()
+variances <- numeric()
+correlations <- numeric()
+
+# Loop through each imputed dataset
+for (i in 1:5) {
+  # Extract the current imputed dataset
+  current_data <- imputed_datasets[[i]]
+  
+  # Calculate the mean and SE for var2
+  mean_var2 <- mean(current_data$var2, na.rm = TRUE)
+  se_var2 <- sd(current_data$var2, na.rm = TRUE) / sqrt(nrow(current_data))
+  
+  # Calculate the correlation between var1 and var2
+  correlation <- cor(current_data$var1, current_data$var2, use = "complete.obs")
+  
+  # Store the results for pooling
+  means <- c(means, mean_var2)
+  variances <- c(variances, se_var2^2)
+  correlations <- c(correlations, correlation)
+  
+  # Append the results to the summary table
+  summary_table <- rbind(
+    summary_table,
+    data.frame(Imputation = i, M = mean_var2, SE = se_var2, r = correlation)
+  )
+}
+
+# Rubin's Rules for pooling
+# Pooled mean
+pooled_mean <- mean(means)
+
+# Between-imputation variance
+B <- var(means)
+
+# Within-imputation variance (average of variances)
+W <- mean(variances)
+
+# Total variance
+T <- W + (1 + (1 / length(means))) * B
+
+# Pooled standard error
+pooled_se <- sqrt(T)
+
+# Pooled correlation (mean correlation, simplified pooling)
+pooled_correlation <- mean(correlations)
+
+# Add the pooled row to the summary table
+summary_table <- rbind(
+  summary_table,
+  data.frame(Imputation = "Pooled", M = pooled_mean, SE = pooled_se, r = pooled_correlation)
+)
+
+
+
+```
+
+]
+
+---
+
+class: center, middle
+
+.pull-right-60[
+
+<small><small><small>
+
+**Average estimates**: $\hat{\theta} = \frac{1}{m} \sum_{t=1}^{m} \hat{\theta}_t$
+
+**Mean**: $\frac{(`r sprintf("%.2f", means[1])` + `r sprintf("%.2f", means[2])` + `r sprintf("%.2f", means[3])` + `r sprintf("%.2f", means[4])` + `r sprintf("%.2f", means[5])`)}{5}=`r sprintf("%.2f", pooled_mean)`$
+
+**Correlation**: $\frac{(`r sprintf("%.2f", correlations[1])` + `r sprintf("%.2f", correlations[2])` + `r sprintf("%.2f", correlations[3])` + `r sprintf("%.2f", correlations[4])` + `r sprintf("%.2f", correlations[5])`)}{5}=`r sprintf("%.2f", pooled_correlation)`$
+
+***
+
+**Variance Within**: $\frac{1}{m} \sum_{t=1}^{m} SE_t^2$
+
+$\frac{(`r sprintf("%.2f", sqrt(variances[1]))`^2 + `r sprintf("%.2f", sqrt(variances[2]))`^2 + `r sprintf("%.2f", sqrt(variances[3]))`^2 + `r sprintf("%.2f", sqrt(variances[4]))`^2 + `r sprintf("%.2f", sqrt(variances[5]))`^2)}{5}=`r sprintf("%.2f", W)`$
+
+***
+
+**Variance Between**: $\frac{1}{m-1} \sum_{t=1}^{m} (\hat{\theta}_t - \bar{\theta})^2$
+
+$\frac{(`r sprintf("%.2f", means[1])` - `r sprintf("%.2f", pooled_mean)`)^2 + (`r sprintf("%.2f", means[2])` - `r sprintf("%.2f", pooled_mean)`)^2 + \\ (`r sprintf("%.2f", means[3])` - `r sprintf("%.2f", pooled_mean)`)^2 + (`r sprintf("%.2f", means[4])` - `r sprintf("%.2f", pooled_mean)`)^2 + (`r sprintf("%.2f", means[5])` - `r sprintf("%.2f", pooled_mean)`)^2}{4}=`r sprintf("%.2f", B)`$
+
+***
+
+**Pooled SE**: $\sqrt{V_W + V_B + \frac{V_B}{m}}$
+
+$\sqrt{`r sprintf("%.2f", W)` + `r sprintf("%.2f", B)` + \frac{`r sprintf("%.2f", B)`}{5}}=`r sprintf("%.2f", pooled_se)`$
+
+</small></small></small>
+
+]
+
+.pull-left-10[
+
+### Pooling Phase
+
+<small>Combine each analysis using .highlight[Rubin's Rules].</small> 
+
+```{r}
+
+# Format the table with knitr and kableExtra
+knitr::kable(
+  summary_table,
+  format = "html",
+  digits = 2, # Round numeric columns to 2 decimal places
+  col.names = c("Imputation", "M", "SE", "r")
+) %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    font_size = 12,
+    full_width = FALSE
+  )
+
+# Fisher's z-transformation: transforms correlations to z-scores
+corrs <- miceadds::micombine.cor(mi.res = imp, variables = c("var1", "var2"), method = "pearson")
+
+riv <- (B+(B/5))/W
+df=(5-1)*(1+(1/(riv^2)))  
+fmi <- ((B+(B/5))/(B+W))*((df+1)/(df+3))+(2/(df+3))
+
+```
+
+<small><small>
+
+*Fisher’s z-transformation*:
+
+*r* = `r sprintf("%.2f",corrs$fisher_r[1])`
+
+</small></small>
+]
+
+---
+
+class: left, middle
+
+# Reporting `r emo::ji("page_facing_up")`
+
+```{r}
+
+# Create the full coverage matrix
+coverage_matrix <- matrix(
+  c(
+    1.00, 0.88, 0.98, 0.93,
+    0.88, 1.00, 0.87, 0.72,
+    0.98, 0.87, 1.00, 0.91,
+    0.93, 0.72, 0.91, 1.00
+  ),
+  nrow = 4,
+  ncol = 4,
+  byrow = TRUE
+)
+
+# Add row and column names to the matrix
+colnames(coverage_matrix) <- c("1", "2", "3", "4")
+rownames(coverage_matrix) <- c("1. var1", "2. var2", "3. var3", "4. var4")
+
+# Extract only the lower triangle of the matrix (excluding diagonal)
+lower_triangle <- coverage_matrix
+lower_triangle[upper.tri(coverage_matrix)] <- NA
+
+# Convert lower triangle to a formatted data frame for better display
+lower_triangle_df <- as.data.frame(lower_triangle)
+lower_triangle_df[] <- lapply(lower_triangle_df, function(x) {
+  ifelse(is.na(x), "", sprintf("%.2f", x))
+})
+
+# Calculate the percentage of missing data
+missing_percentage_matrix <- 100 * (1 - coverage_matrix)
+
+# Extract lower triangle values and compute the missing percentages
+missing_percentage_values <- missing_percentage_matrix[lower.tri(missing_percentage_matrix)]
+
+# Determine the minimum and maximum missing data percentages
+miss_min <- min(missing_percentage_values)
+miss_max <- max(missing_percentage_values)
+
+# Number of participants (N)
+N <- 200
+
+# Total number of pairwise combinations of variables
+total_possible_pairs <- N * (N - 1) / 2
+
+# Compute total observed data from the coverage matrix (only for the lower triangle)
+total_observed <- sum(coverage_matrix[lower.tri(coverage_matrix)] * total_possible_pairs)
+
+# Total possible pairwise observations (excluding diagonal)
+total_possible_pairwise <- sum(lower.tri(coverage_matrix)) * total_possible_pairs
+
+# Total missing data is the difference between possible and observed
+total_missing <- total_possible_pairwise - total_observed
+
+ndf <- format(total_possible_pairwise, big.mark = ",", scientific = FALSE) 
+mdf <- format(total_missing, big.mark = ",", scientific = FALSE) 
+
+# Calculate the percentage of missing data
+percent_missing <- round((total_missing / total_possible_pairwise) * 100, 2)
+
+```
+
+<small>**Step 1**. Report rates of missing data for primary analysis variables.</small>
+
+.small[
+> We analyzed the incomplete data and found missing values in all four analysis variables, with missing rates ranging from `r miss_min` to `r miss_max`%. Of the `r N` participants, we found `r mdf` out of `r ndf` total data points were missing (`r percent_missing`%).]
+
+.pull-right-60[
+<small><small>**Extended Reporting**. The covariance coverage table in the supplemental materials shows the proportion of cases with complete data for each individual variable (on the main diagonal) and for each variable pair (off-diagonal entries).</small></small>
+]
+
+.pull-left-10[
+
+<small><small>*covariance coverage table*</small></small>
+
+```{r}
+# Display the formatted table with kable and apply styling
+knitr::kable(
+  lower_triangle_df,
+  format = "html",
+  align = "ll",
+  escape = FALSE
+) %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    font_size = 13.5, full_width = TRUE
+  )
+```
+]
+
+---
+
+class: left, middle
+
+# Reporting `r emo::ji("page_facing_up")` `r emo::ji("page_facing_up")`
+
+<small>**Step 2**. Imputation model assumptions.</small>
+
+```{r, echo = F, message=FALSE, warning=FALSE}
+library(naniar)
+
+# Create a data frame with some missing values for demonstration
+set.seed(123)  # For reproducibility
+data <- data.frame(
+  var1 = c(1, 2, NA, 4, 5),
+  var2 = c(NA, 2, 3, 4, 5),
+  var3 = c(1, NA, 3, 4, 5),
+  var4 = c(1, 2, 3, NA, 5)
+)
+
+# Perform Little's MCAR test
+mcar_test_result <- mcar_test(data)
+
+if(mcar_test_result$p.value<.05){mcar_dir <- "were"}else{mcar_dir <- "were not"}
+
+mcar_df <- mcar_test_result$df
+mcar_chi <- round(mcar_test_result$statistic, 2)
+mcar_p <- round(mcar_test_result$p.value, 3)
+patterns <- mcar_test_result$missing.patterns
+
+```
+
+.small[
+> We found `r patterns` missign data patterns. Typically, scores were missing because the data collection app randomly failed to save some responses. Little’s Missing Completely at Random (MCAR) test indicated that missing data `r mcar_dir` likely to derive from a MAR or MNAR mechanism, χ2(`r mcar_df`) = `r mcar_chi`, *p* = `r mcar_p`. Furthermore, mean comparisons revealed no significant differences among demographic variables between participants with complete data and those with incomplete data.  
+]
+<small><small>
+**Extended Reporting**. Provide sensitivity analyses for MI algorithms (special data structures = special algorithms) and/or MNAR models. 
+</small></small>
+
+---
+
+class: left, middle
+
+# Reporting `r emo::ji("page_facing_up")` `r emo::ji("page_facing_up")` `r emo::ji("page_facing_up")`
+
+<small>**Step 3**. Report methods and software.</small>
+
+.small[
+> To address the issue of incomplete data, we employed the multiple imputation (MI) technique using the mice package in R. Specifically, we utilized the default mice() function using the norm algorithm to generate 100 imputed datasets under the MAR assumption. To ensure convergence and minimize autocorrelation between the imputed datasets, we set a conservative 60 iterations per imputation cycle. The imputation process involved 9 variables, including the four primary variables—var1, var2, var3, and var4—and five auxiliary variables: age, sex, race, education, and income.  
+]
+<small><small>
+**Extended Reporting**. Provide supplemental materials for details and code.
+</small></small>
+
+---
+
+## Considerations `r emo::ji("speech_balloon")`
+
+- Sample size
+- Rounding
+- Number of imputations
+- Interactions
+- Categorical data
+- Clustered data
+- Large datasets
+
+---
+
+## Myths `r emo::ji("lying_face")`
+
+- Imputation is making up data
+- Unfair to impute the DV
+- Must have MAR to use MI/FIML
+- Check imputation to make sure (sort of)
+- Imputed values are meaningful
+- No need with large samples
+
+---
+
+class: center, middle
+
+# Any questions?
+
+
