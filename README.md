@@ -41,4 +41,4 @@ If you use these materials, please cite them as follows.
 
 ## Acknowledgements
 
-The recommendations in this workshop are based on Little, T. D. (2024). Longitudinal structural equation modeling. Guilford Publications. The organization of this repository is based on Aust, F., & Breuer, J. (2022). [Workshop on reproducible research practices for psychologists](https://github.com/crsh/reproducible-research-practices-workshop). 
+The recommendations in this workshop are based on Little, T. D. (2024). [Longitudinal structural equation modeling](https://www.guilford.com/books/Longitudinal-Structural-Equation-Modeling/Todd-Little/9781462553143?srsltid=AfmBOopku7SPRR6ZMBzRytjCQ8Jb3wwnO2llYo2c6CB3fiPIe9GwyW1B). Guilford Publications. The organization of this repository is based on Aust, F., & Breuer, J. (2022). [Workshop on reproducible research practices for psychologists](https://github.com/crsh/reproducible-research-practices-workshop). 
