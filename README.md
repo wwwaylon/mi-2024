@@ -29,9 +29,9 @@ This session is intended for a general research audience, especially those inter
 
 ## Recommended literature
 
-> Enders, C. K. (2010). Applied missing data analysis. New York: Guilford.
+> Enders, C. K. (2022). [Applied missing data analysis (2nd ed.).](https://www.appliedmissingdata.com/) The Guilford Press.
 
-> Graham, J. W. (2009). Missing data analysis: Making it work in the real world. Annual Review of Psychology, 60, 549-576.
+> Graham, J. W. (2009). [Missing data analysis: Making it work in the real world](https://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/emalgm?action=AttachFile&do=get&target=graham.pdf). Annual Review of Psychology, 60, 549-576.
 
 ## Citation
 
@@ -41,4 +41,4 @@ If you use these materials, please cite them as follows.
 
 ## Acknowledgements
 
-The recommendations in this workshop are based on Little, T. D. (2024). [Longitudinal structural equation modeling](https://www.guilford.com/books/Longitudinal-Structural-Equation-Modeling/Todd-Little/9781462553143?srsltid=AfmBOopku7SPRR6ZMBzRytjCQ8Jb3wwnO2llYo2c6CB3fiPIe9GwyW1B). Guilford Publications. The organization of this repository is based on Aust, F., & Breuer, J. (2022). [Workshop on reproducible research practices for psychologists](https://github.com/crsh/reproducible-research-practices-workshop). 
+The recommendations in this workshop are based on Little, T. D. (2024). Longitudinal structural equation modeling. Guilford Publications and Enders, C. K. (2010). Applied missing data analysis. New York: Guilford. The organization of this repository is based on Aust, F., & Breuer, J. (2022). Workshop on reproducible research practices for psychologists. 
